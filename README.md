@@ -1,21 +1,10 @@
 # INDCPAD_HE_ThresFHE
 
-This is a git repository that implements the IND-CPA-D attacks introduced in ``Attacks Against the IND-CPAD Security of Exact FHE Schemes`` written by the following authors:
-
-Jung Hee Choeon (SNU & Crypto Lab Inc.)
-
-Hyeongmin Choe (SNU)
-
-Alain Passelègue (CryptoLab Inc.)
-
-Damien Stehlé (CryptoLab Inc.)
-
-Elias Suvanto (CryptoLab Inc.)
+This is a git repository that implements the IND-CPA-D attacks introduced in [Attacks Against the INDCPA-D Security of Exact FHE Schemes](https://eprint.iacr.org/2024/127).
 
 # KRD experiments
 
-This folder contains 5 folders concerning TFHE:
--   TFHE-rs library: An implementation of TFHE (available at https://github.com/zama-ai/tfhe-rs, commit ``ad41fdf5a5060c0a981cd0c35bf998feafe68e02``). 
+This folder contains 4 folders concerning TFHE:
 -   collect\_TFHE\_ciphertexts: Rust code using TFHE-rs to run the oracle side. 
 -   collected\_samples: Outputs from the above (specifically, from the custom parameter). 
 -   TFHE\_KRD: Python code reading the samples (failed ciphertexts) and guessing the secret key. This is the KRD adversary side. 
@@ -28,10 +17,11 @@ and 2 folders about BFV KRD:
 ## How to generate legitimate ciphertexts that fail to decrypt
 
 There are two options:
--   Running a TFHE library: Run  ```cargo run --release > ../collected_samples/failed_ctxt.out``` inside the ```collect_TFHE_ciphertexts``` folder.
+1. Running a TFHE library: Run  ```cargo run --release > ../collected_samples/failed_ctxt.out``` inside the ```collect_TFHE_ciphertexts``` folder. It needs TFHE-rs library: An implementation of TFHE (available at https://github.com/zama-ai/tfhe-rs, commit ``ad41fdf5a5060c0a981cd0c35bf998feafe68e02``). 
+
 It will run the paper TFHE KRD collecting part using the ```TFHE-rs``` library.
 It will use the 128-bit IND-CPA secure custom parameters. It will then put the collected ciphertexts as a text file in the ```collected_samples``` folder
--   Simulating using rejection sampling: Run  `python3 simulate_TFHE_ciphertexts/main.py > ../collected_samples/sim_failed_ctxt.out` to generate incorrect ciphertexts using a rejection sampling technique on the conditioned distribution detailed in the paper.
+2. Simulating using rejection sampling: Run  `python3 simulate_TFHE_ciphertexts/simulate_failures.py > ../collected_samples/sim_failed_ctxt.out` to generate incorrect ciphertexts using a rejection sampling technique on the conditioned distribution detailed in the paper.
 
 ## How to run TFHE-KRD
 
