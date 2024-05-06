@@ -30,4 +30,24 @@ It will read the samples using ```py_stdin.py```, call `KRD.py` on them to guess
 
 ## How to run BFV KRD
 
-The C++ code is available and makes a call to the OpenFHE library. It returns the secret LWE error. 
+The C++ code is available and makes a call to the OpenFHE library. It returns the secret LWE error.
+
+To install OpenFHE:
+```bash
+$ git clone git@github.com:openfheorg/openfhe-development.git
+$ cd openfhe-development
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make -j 8
+$ sudo make install
+```
+
+To build the attack:
+```bash
+$ cd BFV_KRD
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make -j 8
+```
